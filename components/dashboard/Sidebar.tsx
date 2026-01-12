@@ -29,6 +29,7 @@ import {
     Bell,
     CreditCard,
     Zap,
+    Video,
 } from "lucide-react"
 
 export default function Sidebar() {
@@ -62,12 +63,14 @@ export default function Sidebar() {
                 return [
                     { href: "/dashboard/clinic", label: "Visão Geral", icon: LayoutDashboard },
                     { href: "/dashboard/clinic/schedule", label: "Agenda de Salas", icon: Calendar },
+                    { href: "/dashboard/telemedicine", label: "Salas de Vídeo", icon: Video },
                     { href: "/dashboard/clinic/finance", label: "Faturamento", icon: DollarSign },
                 ]
             case "veterinarian":
                 return [
                     { href: "/dashboard/vet", label: "Visão Geral", icon: LayoutDashboard },
                     { href: "/appointments", label: "Minha Agenda", icon: Calendar },
+                    { href: "/dashboard/telemedicine", label: "Telemedicina", icon: Video },
                     { href: "/pets", label: "Pacientes", icon: Users },
                     { href: "/dashboard/vet/reports", label: "Relatórios", icon: BarChart3 },
                     { href: "/dashboard/vet/settings", label: "Configurações", icon: Settings },

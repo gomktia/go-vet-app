@@ -26,7 +26,7 @@ export const testUsers: User[] = [
   {
     id: "0",
     email: "admin@vetcare.com",
-    password: "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi", // password: 123456
+    password: "$2a$10$SSO74uPEFwOKTPN9g/Gm7.N0A9Twq8sGX.LZlRugPpJHS4YevHFu.", // password: 123456
     name: "Super Admin",
     role: "admin",
     avatar: "/admin-avatar.png",
@@ -38,7 +38,7 @@ export const testUsers: User[] = [
   {
     id: "1",
     email: "tutor@vetcare.com",
-    password: "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi", // password: 123456
+    password: "$2a$10$SSO74uPEFwOKTPN9g/Gm7.N0A9Twq8sGX.LZlRugPpJHS4YevHFu.", // password: 123456
     name: "Maria Silva",
     role: "tutor",
     avatar: "/diverse-user-avatars.png",
@@ -52,7 +52,7 @@ export const testUsers: User[] = [
   {
     id: "2",
     email: "vet@vetcare.com",
-    password: "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi", // password: 123456
+    password: "$2a$10$SSO74uPEFwOKTPN9g/Gm7.N0A9Twq8sGX.LZlRugPpJHS4YevHFu.", // password: 123456
     name: "Dr. João Santos",
     role: "veterinarian",
     avatar: "/caring-vet.png",
@@ -71,7 +71,7 @@ export const testUsers: User[] = [
   {
     id: "3",
     email: "clinica@vetcare.com",
-    password: "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi", // password: 123456
+    password: "$2a$10$SSO74uPEFwOKTPN9g/Gm7.N0A9Twq8sGX.LZlRugPpJHS4YevHFu.", // password: 123456
     name: "Hospital Veterinário Tubarão",
     role: "clinic",
     avatar: "/clinic-avatar.png", // Placeholder
@@ -100,16 +100,13 @@ export const authenticateUser = async (
   // Atualizar último login
   user.lastLogin = new Date().toISOString()
 
-  // Gerar JWT token
-  const token = jwt.sign(
-    {
-      userId: user.id,
-      email: user.email,
-      role: user.role,
-    },
-    JWT_SECRET,
-    { expiresIn: "7d" },
-  )
+  // Gerar JWT token mockado para compatibilidade com o client-side (MVP)
+  const token = btoa(JSON.stringify({
+    userId: user.id,
+    email: user.email,
+    role: user.role,
+    exp: Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60)
+  }))
 
   // Remover senha do objeto retornado
   const { password: _, ...userWithoutPassword } = user

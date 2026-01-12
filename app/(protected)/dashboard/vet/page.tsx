@@ -1,7 +1,9 @@
 "use client"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   Calendar,
   Users,
@@ -17,14 +19,18 @@ import {
   MapPin,
   Phone,
   LogOut,
+  TrendingUp,
+  Video,
+  Play,
+  FileText,
+  CheckCircle2
 } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { VetPerformanceChart } from "@/components/dashboard/VetPerformanceChart"
 
 export default function VetDashboard() {
   const router = useRouter()
-
-
 
   const todayAppointments = [
     {
@@ -78,259 +84,205 @@ export default function VetDashboard() {
       time: "25 min atrás",
       urgent: true,
     },
-    {
-      id: "3",
-      from: "Ana Costa",
-      pet: "Rex",
-      message: "Resultado do exame de sangue chegou?",
-      time: "1 hora atrás",
-      urgent: false,
-    },
   ]
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case "confirmed":
-        return "bg-green-100 text-green-800"
+        return "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400"
       case "in-progress":
-        return "bg-blue-100 text-blue-800"
+        return "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
       case "pending":
-        return "bg-yellow-100 text-yellow-800"
+        return "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400"
       default:
         return "bg-gray-100 text-gray-800"
     }
   }
 
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case "confirmed":
-        return "Confirmado"
-      case "in-progress":
-        return "Em Andamento"
-      case "pending":
-        return "Pendente"
-      default:
-        return status
-    }
-  }
-
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
-      <div className="space-y-6">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-          <div>
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-emerald-400">Painel Veterinário</h2>
-            <p className="text-slate-600 dark:text-slate-400">Acompanhe sua agenda e o cuidado com seus pacientes.</p>
-          </div>
-          <div className="flex gap-2">
-            <Link href="/dashboard/vet/settings">
-              <Button variant="outline" className="dark:border-slate-800 dark:hover:bg-slate-900">
-                <Settings className="w-4 h-4 mr-2" /> Configurações
-              </Button>
-            </Link>
-            <Link href="/dashboard/vet/reports">
-              <Button className="bg-emerald-600 hover:bg-emerald-700 text-white dark:bg-emerald-700 dark:hover:bg-emerald-600">
-                <BarChart3 className="w-4 h-4 mr-2" /> Relatórios
-              </Button>
-            </Link>
-          </div>
+    <div className="container mx-auto px-4 py-8 max-w-7xl pb-20">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-6">
+        <div>
+          <h2 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Consultório <span className="text-emerald-600 dark:text-emerald-400">Digital</span></h2>
+          <p className="text-slate-500 dark:text-slate-400 mt-1">Sua central de pacientes, diagnósticos e produtividade.</p>
         </div>
-
-
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <Link href="/appointments">
-            <Card className="border-emerald-200 hover:shadow-lg transition-shadow cursor-pointer">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-emerald-700">Consultas Hoje</CardTitle>
-                <Calendar className="h-4 w-4 text-emerald-600" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold text-emerald-900">8</div>
-                <p className="text-xs text-emerald-600">+2 desde ontem</p>
-              </CardContent>
-            </Card>
-          </Link>
-
-          <Link href="/pets">
-            <Card className="border-blue-200 hover:shadow-lg transition-shadow cursor-pointer">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-blue-700">Pacientes Ativos</CardTitle>
-                <Users className="h-4 w-4 text-blue-600" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold text-blue-900">156</div>
-                <p className="text-xs text-blue-600">+12 este mês</p>
-              </CardContent>
-            </Card>
-          </Link>
-
-          <Link href="/chat">
-            <Card className="border-purple-200 hover:shadow-lg transition-shadow cursor-pointer">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-purple-700">Mensagens</CardTitle>
-                <MessageSquare className="h-4 w-4 text-purple-600" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold text-purple-900">23</div>
-                <p className="text-xs text-purple-600">5 não lidas</p>
-              </CardContent>
-            </Card>
-          </Link>
-
-          <Link href="/payments">
-            <Card className="border-yellow-200 hover:shadow-lg transition-shadow cursor-pointer">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-yellow-700">Receita Mensal</CardTitle>
-                <DollarSign className="h-4 w-4 text-yellow-600" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold text-yellow-900">R$ 18.5k</div>
-                <p className="text-xs text-yellow-600">+8% vs mês anterior</p>
-              </CardContent>
-            </Card>
-          </Link>
+        <div className="flex gap-3">
+          <Button variant="outline" className="rounded-full shadow-sm dark:border-slate-800">
+            <Settings className="w-4 h-4 mr-2" /> Preferências
+          </Button>
+          <Button className="bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600 rounded-full shadow-lg shadow-emerald-500/20 px-8">
+            <BarChart3 className="w-4 h-4 mr-2" /> Relatórios
+          </Button>
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Today's Schedule */}
-          <div className="lg:col-span-2">
-            <Card className="border-emerald-200">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle className="text-emerald-900">Agenda de Hoje</CardTitle>
-                    <CardDescription>Seus compromissos para hoje, 15 de Janeiro</CardDescription>
-                  </div>
-                  <Link href="/appointments">
-                    <Button variant="outline" size="sm" className="border-emerald-300 text-emerald-700 bg-transparent">
-                      <Clock className="w-4 h-4 mr-2" />
-                      Ver Agenda Completa
-                    </Button>
-                  </Link>
+      <div className="grid lg:grid-cols-12 gap-8">
+        {/* Left Column */}
+        <div className="lg:col-span-8 space-y-8">
+          {/* KPI Row */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Card className="border-none shadow-md shadow-slate-200/50 dark:bg-slate-900/50">
+              <CardContent className="p-4">
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 font-mono">Agendados</p>
+                <div className="flex items-end gap-2">
+                  <h3 className="text-2xl font-black text-slate-900 dark:text-white leading-none">12</h3>
+                  <Badge variant="outline" className="text-[9px] text-emerald-600 border-none p-0">+2</Badge>
                 </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {todayAppointments.map((appointment) => (
-                    <div
-                      key={appointment.id}
-                      className="flex items-center justify-between p-4 border border-emerald-100 rounded-lg hover:bg-emerald-50 transition-colors"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="text-center">
-                          <div className="text-lg font-bold text-emerald-900">{appointment.time}</div>
-                        </div>
-                        <div>
-                          <h3 className="font-medium text-emerald-900">{appointment.pet}</h3>
-                          <p className="text-sm text-emerald-600">{appointment.owner}</p>
-                          <p className="text-xs text-emerald-500">{appointment.type}</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Badge className={getStatusColor(appointment.status)}>
-                          {getStatusText(appointment.status)}
-                        </Badge>
-                        <Link href={`/appointments/${appointment.id}/edit`}>
-                          <Button size="sm" variant="outline">
-                            Ver Detalhes
-                          </Button>
-                        </Link>
-                      </div>
-                    </div>
-                  ))}
+              </CardContent>
+            </Card>
+            <Card className="border-none shadow-md shadow-slate-200/50 dark:bg-slate-900/50">
+              <CardContent className="p-4">
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 font-mono">Financeiro</p>
+                <div className="flex items-end gap-2">
+                  <h3 className="text-2xl font-black text-slate-900 dark:text-white leading-none">R$ 1.8k</h3>
+                  <Badge variant="outline" className="text-[9px] text-emerald-600 border-none p-0">85%</Badge>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="border-none shadow-md shadow-slate-200/50 dark:bg-slate-900/50">
+              <CardContent className="p-4">
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 font-mono">Pacientes</p>
+                <div className="flex items-end gap-2">
+                  <h3 className="text-2xl font-black text-slate-900 dark:text-white leading-none">156</h3>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="border-none shadow-md shadow-slate-200/50 dark:bg-slate-900/50 bg-indigo-600 text-white">
+              <CardContent className="p-4">
+                <p className="text-[10px] font-black text-indigo-100 uppercase tracking-widest mb-2 font-mono">Chat Emergência</p>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-2xl font-black leading-none">3</h3>
+                  <div className="h-2 w-2 rounded-full bg-red-400 animate-pulse"></div>
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          {/* Messages & Quick Actions */}
-          <div className="space-y-6">
-            {/* Recent Messages */}
-            <Card className="border-emerald-200">
-              <CardHeader>
-                <CardTitle className="text-emerald-900">Mensagens Recentes</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                {recentMessages.map((message) => (
-                  <div
-                    key={message.id}
-                    className={`p-3 rounded-lg border cursor-pointer hover:shadow-sm transition-shadow ${message.urgent ? "border-red-200 bg-red-50" : "border-emerald-100 bg-white"}`}
-                    onClick={() => router.push(`/chat/${message.id}`)}
-                  >
-                    <div className="flex items-center justify-between mb-1">
-                      <h4 className="font-medium text-emerald-900">{message.from}</h4>
-                      {message.urgent && <Badge className="bg-red-100 text-red-800">Urgente</Badge>}
-                    </div>
-                    <p className="text-sm text-emerald-600 mb-1">{message.pet}</p>
-                    <p className="text-sm text-emerald-800">{message.message}</p>
-                    <p className="text-xs text-emerald-500 mt-1">{message.time}</p>
+          {/* Performance Section */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <VetPerformanceChart />
+            <Card className="border-none shadow-lg dark:bg-indigo-900 bg-indigo-600 text-white relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
+                <TrendingUp className="w-24 h-24" />
+              </div>
+              <CardContent className="p-6 relative z-10">
+                <h3 className="text-xl font-black mb-1">Qualidade do Cuidado</h3>
+                <p className="text-indigo-100 text-xs mb-4">Seu Patient Score está acima da média da plataforma.</p>
+                <div className="flex items-center gap-4 mt-6">
+                  <div className="flex -space-x-3">
+                    {[1, 2, 3, 4].map(i => (
+                      <Avatar key={i} className="border-2 border-indigo-600 h-8 w-8">
+                        <AvatarFallback className="bg-white text-indigo-600 text-[10px]">P</AvatarFallback>
+                      </Avatar>
+                    ))}
                   </div>
-                ))}
-                <Link href="/chat">
-                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700">Ver Todas as Mensagens</Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            {/* Quick Actions */}
-            <Card className="border-emerald-200">
-              <CardHeader>
-                <CardTitle className="text-emerald-900">Ações Rápidas</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <Link href="/appointments/new">
-                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
-                    <Stethoscope className="w-4 h-4 mr-2" />
-                    Nova Consulta
-                  </Button>
-                </Link>
-                <Link href="/pets/new">
-                  <Button
-                    variant="outline"
-                    className="w-full border-emerald-300 text-emerald-700 hover:bg-emerald-100 bg-transparent"
-                  >
-                    <Heart className="w-4 h-4 mr-2" />
-                    Cadastrar Paciente
-                  </Button>
-                </Link>
-                <Button
-                  variant="outline"
-                  className="w-full border-emerald-300 text-emerald-700 hover:bg-emerald-100 bg-transparent"
-                  onClick={() => router.push("/dashboard/vet/prescriptions")}
-                >
-                  <Pill className="w-4 h-4 mr-2" />
-                  Prescrever Medicamento
-                </Button>
-                <Link href="/chat/new">
-                  <Button
-                    variant="outline"
-                    className="w-full border-emerald-300 text-emerald-700 hover:bg-emerald-100 bg-transparent"
-                  >
-                    <MessageSquare className="w-4 h-4 mr-2" />
-                    Enviar Mensagem
-                  </Button>
-                </Link>
-                <Link href="/location">
-                  <Button
-                    variant="outline"
-                    className="w-full border-emerald-300 text-emerald-700 hover:bg-emerald-100 bg-transparent"
-                  >
-                    <MapPin className="w-4 h-4 mr-2" />
-                    Visitas Domiciliares
-                  </Button>
-                </Link>
-                <Button
-                  variant="outline"
-                  className="w-full border-emerald-300 text-emerald-700 hover:bg-emerald-100 bg-transparent"
-                  onClick={() => router.push("/chat/emergency")}
-                >
-                  <Phone className="w-4 h-4 mr-2" />
-                  Atendimento Emergência
-                </Button>
+                  <span className="text-[10px] font-bold text-indigo-100">+48 Tutores Satisfeitos</span>
+                </div>
               </CardContent>
             </Card>
           </div>
+
+          {/* Today's Schedule - Refactored */}
+          <Card className="border-none shadow-xl dark:bg-slate-900/50 overflow-hidden">
+            <CardHeader className="bg-slate-50 dark:bg-slate-900/80 border-b dark:border-slate-800 p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="text-lg font-black dark:text-white uppercase tracking-tight">Agenda de Hoje</CardTitle>
+                  <p className="text-slate-500 text-xs font-medium">Você tem 4 compromissos restantes.</p>
+                </div>
+                <Link href="/appointments">
+                  <Button variant="ghost" size="sm" className="text-emerald-600 font-black text-xs">VER TUDO</Button>
+                </Link>
+              </div>
+            </CardHeader>
+            <CardContent className="p-0 divide-y dark:divide-slate-800">
+              {todayAppointments.map((appointment) => (
+                <div key={appointment.id} className="flex items-center justify-between p-6 hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group">
+                  <div className="flex items-center gap-6">
+                    <div className="text-center">
+                      <p className="text-sm font-black text-slate-400 group-hover:text-emerald-600 transition-colors">{appointment.time}</p>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-800 dark:text-white">{appointment.pet}</h4>
+                      <p className="text-xs text-slate-500">{appointment.owner} • {appointment.type}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <Badge className={`${getStatusColor(appointment.status)} text-[10px] font-bold border-none px-3 py-1 uppercase`}>
+                      {appointment.status.replace('-', ' ')}
+                    </Badge>
+                    <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <Link href={`/dashboard/telemedicine`}>
+                        <Button size="icon" variant="ghost" className="h-9 w-9 bg-blue-600 hover:bg-blue-700 rounded-xl">
+                          <Video className="w-4 h-4 text-white" />
+                        </Button>
+                      </Link>
+                      <Button size="icon" variant="outline" className="h-9 w-9 rounded-xl dark:border-slate-800">
+                        <FileText className="w-4 h-4 text-slate-500" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Right Column */}
+        <div className="lg:col-span-4 space-y-8">
+          {/* Telemedicine CTA */}
+          <div className="bg-slate-900 rounded-[2.5rem] p-8 text-white relative overflow-hidden group shadow-2xl">
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl"></div>
+            <h3 className="text-2xl font-black mb-4">Sala de Espera</h3>
+            <p className="text-slate-400 text-xs mb-6 leading-relaxed">3 pacientes aguardando agendamento por telemedicina.</p>
+            <Button className="w-full bg-emerald-600 hover:bg-emerald-700 font-black rounded-2xl h-12 shadow-lg shadow-emerald-500/20 group">
+              <Play className="w-4 h-4 mr-2 fill-current" /> INICIAR CHAMADA
+            </Button>
+          </div>
+
+          {/* Task List */}
+          <Card className="border-none shadow-lg dark:bg-slate-900/50">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xs font-black text-slate-400 uppercase tracking-widest">Tarefas Diagnósticas</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {[
+                { t: "Revisar Exame Rex", p: "Urgente", done: false },
+                { t: "Assinar Prescrição Mimi", p: "Hoje", done: true },
+                { t: "Follow-up Max", p: "Pendente", done: false }
+              ].map((task, i) => (
+                <div key={i} className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50">
+                  <div className="flex items-center gap-3">
+                    <div className={`h-5 w-5 rounded-md border-2 flex items-center justify-center ${task.done ? 'bg-emerald-500 border-emerald-500' : 'border-slate-300'}`}>
+                      {task.done && <CheckCircle2 className="w-4 h-4 text-white" />}
+                    </div>
+                    <div>
+                      <p className={`text-sm font-bold ${task.done ? 'line-through text-slate-400' : 'text-slate-800 dark:text-white'}`}>{task.t}</p>
+                      <p className="text-[10px] text-slate-400 font-bold uppercase">{task.p}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              <Button variant="ghost" className="w-full text-[10px] font-black text-slate-400 hover:text-emerald-600">ADICIONAR TAREFA</Button>
+            </CardContent>
+          </Card>
+
+          {/* Emergency Messages */}
+          <Card className="border-none shadow-lg dark:bg-slate-900/50 bg-red-50/50 dark:bg-red-950/10">
+            <CardHeader className="pb-2 flex flex-row items-center justify-between">
+              <CardTitle className="text-xs font-black text-red-600 uppercase tracking-widest">Urgências</CardTitle>
+              <div className="h-2 w-2 rounded-full bg-red-600 animate-ping"></div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {recentMessages.filter(m => m.urgent).map(m => (
+                <div key={m.id} className="p-4 rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-red-600 shadow-sm cursor-pointer hover:scale-[1.02] transition-transform">
+                  <p className="text-xs font-black text-slate-900 dark:text-white">{m.from} <span className="text-red-600">({m.pet})</span></p>
+                  <p className="text-xs text-slate-500 mt-1 line-clamp-1">{m.message}</p>
+                  <p className="text-[9px] text-slate-400 mt-2 font-bold uppercase">{m.time}</p>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
