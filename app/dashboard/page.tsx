@@ -17,6 +17,8 @@ import {
   LogOut,
   Settings,
   CreditCard,
+  Building2,
+  Navigation,
 } from "lucide-react"
 import Link from "next/link"
 import { getCurrentUser, logoutUser } from "@/lib/auth"
