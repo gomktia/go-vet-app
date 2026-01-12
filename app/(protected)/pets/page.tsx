@@ -62,28 +62,13 @@ export default function PetsPage() {
   )
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-blue-50">
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-emerald-100 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center">
-              <Heart className="w-5 h-5 text-white" />
-            </div>
-            <h1 className="text-xl font-bold text-emerald-800">VetCare</h1>
-          </div>
-          <Button className="bg-emerald-600 hover:bg-emerald-700" asChild>
-            <Link href="/dashboard">Dashboard</Link>
-          </Button>
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-transparent">
       <div className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
-            <h2 className="text-3xl font-bold text-emerald-800 mb-2">Meus Pets</h2>
-            <p className="text-emerald-700">Gerencie as informações dos seus companheiros</p>
+            <h2 className="text-3xl font-bold text-emerald-800 dark:text-emerald-400 mb-2">Meus Pets</h2>
+            <p className="text-emerald-700 dark:text-emerald-500/80">Gerencie as informações dos seus companheiros</p>
           </div>
           <Button className="bg-emerald-600 hover:bg-emerald-700" asChild>
             <Link href="/pets/new">

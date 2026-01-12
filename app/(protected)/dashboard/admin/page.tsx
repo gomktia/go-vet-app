@@ -42,38 +42,7 @@ export default function AdminDashboardPage() {
     }
 
     return (
-        <div className="min-h-screen bg-slate-950 text-slate-100">
-            {/* Admin Header */}
-            <header className="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
-                <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
-                            <ShieldCheck className="w-5 h-5 text-white" />
-                        </div>
-                        <div>
-                            <h1 className="text-xl font-bold text-white">VetCare <span className="text-purple-400 font-normal">Admin</span></h1>
-                        </div>
-                    </div>
-
-                    <nav className="hidden md:flex items-center gap-6">
-                        <Link href="/dashboard/admin" className="text-white font-medium border-b-2 border-purple-500 pb-1">Overview</Link>
-                        <Link href="/dashboard/admin/users" className="text-slate-400 hover:text-white font-medium">Usuários</Link>
-                        <Link href="/dashboard/admin/finance" className="text-slate-400 hover:text-white font-medium">Financeiro</Link>
-                        <Link href="/dashboard/admin/reports" className="text-slate-400 hover:text-white font-medium">Relatórios</Link>
-                    </nav>
-
-                    <div className="flex items-center gap-3">
-                        <Avatar className="h-8 w-8 ring-2 ring-purple-600">
-                            <AvatarImage src="/admin-avatar.png" />
-                            <AvatarFallback className="bg-purple-900 text-purple-200">SA</AvatarFallback>
-                        </Avatar>
-                        <Button variant="ghost" size="icon" onClick={handleLogout} className="text-slate-400 hover:text-red-400">
-                            <LogOut className="w-5 h-5" />
-                        </Button>
-                    </div>
-                </div>
-            </header>
-
+        <div className="min-h-screen bg-transparent">
             <div className="container mx-auto px-4 py-8 max-w-7xl">
 
                 <div className="flex justify-between items-center mb-8">

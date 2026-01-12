@@ -61,24 +61,24 @@ export const clinics: Clinic[] = [
         rating: 4.8,
         latitude: -28.4744, // Coordenadas aproximadas
         longitude: -49.0166,
-        imageUrl: "/clinic-1.jpg"
+        imageUrl: "/clinic-1.png"
     },
     {
         id: "c2",
         name: "Clínica Pet Torres",
-        description: "Estrutura nova e moderna no centro de Torres.",
+        description: "Estrutura nova e moderna no centro de Torres com foco em diagnóstico por imagem.",
         address: "Rua José Bonifácio, 500",
         city: "Torres",
         state: "RS",
         phone: "(51) 3664-0000",
         facilities: {
             hasSurgeryRoom: true,
-            hasXRay: false,
-            hasUltrasound: false,
+            hasXRay: true,
+            hasUltrasound: true,
             hasInternation: true,
             surgeryRoomsCount: 1
         },
-        equipment: ["Anestesia Inalatória", "Bisturi Elétrico"],
+        equipment: ["Anestesia Inalatória", "Bisturi Elétrico", "Ultrassom Doppler"],
         rentalPricePerHour: 100,
         pendingDemand: [
             { specialty: "Cardiologia", count: 3 }
@@ -87,11 +87,12 @@ export const clinics: Clinic[] = [
         rating: 4.5,
         latitude: -29.3364,
         longitude: -49.7278,
-        imageUrl: "/clinic-2.jpg"
+        imageUrl: "/clinic-2.png"
     },
     {
         id: "c3",
-        name: "VetCare Araranguá",
+        name: "Hospital Veterinário Araranguá",
+        description: "Centro hospitalar completo para procedimentos de todas as complexidades.",
         address: "Av. 7 de Setembro, 800",
         city: "Araranguá",
         state: "SC",
@@ -100,13 +101,16 @@ export const clinics: Clinic[] = [
             hasSurgeryRoom: true,
             hasXRay: true,
             hasUltrasound: true,
-            hasInternation: false,
-            surgeryRoomsCount: 1
+            hasInternation: true,
+            surgeryRoomsCount: 2
         },
+        equipment: ["Anestesia Inalatória", "Raio-X Digital", "Laboratório Próprio"],
+        rentalPricePerHour: 130,
         isPartner: true,
         rating: 4.6,
         latitude: -28.9355,
-        longitude: -49.4927
+        longitude: -49.4927,
+        imageUrl: "/clinic-3.png"
     },
     {
         id: "c4",

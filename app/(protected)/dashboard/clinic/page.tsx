@@ -61,46 +61,7 @@ export default function ClinicDashboardPage() {
     }
 
     return (
-        <div className="min-h-screen bg-slate-50">
-            {/* Header específico para Clínica */}
-            <header className="bg-white border-b border-indigo-100 sticky top-0 z-50">
-                <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-                            <Building2 className="w-5 h-5 text-white" />
-                        </div>
-                        <div>
-                            <h1 className="text-xl font-bold text-indigo-900">VetCare <span className="text-indigo-600 font-normal">Partner</span></h1>
-                        </div>
-                    </div>
-
-                    <nav className="hidden md:flex items-center gap-6">
-                        <Link href="/dashboard/clinic" className="text-indigo-900 font-medium border-b-2 border-indigo-600 pb-1">Visão Geral</Link>
-                        <Link href="/dashboard/clinic/schedule" className="text-slate-500 hover:text-indigo-700 font-medium">Agenda de Salas</Link>
-                        <Link href="/dashboard/clinic/finance" className="text-slate-500 hover:text-indigo-700 font-medium">Faturamento</Link>
-                    </nav>
-
-                    <div className="flex items-center gap-3">
-                        <Button variant="ghost" size="sm" className="relative">
-                            <Bell className="w-5 h-5 text-slate-500" />
-                            <span className="absolute top-1 right-2 w-2 h-2 bg-red-500 rounded-full"></span>
-                        </Button>
-                        <div className="h-8 w-px bg-slate-200 mx-1"></div>
-                        <Avatar className="h-8 w-8">
-                            <AvatarImage src="/clinic-avatar.png" />
-                            <AvatarFallback>HT</AvatarFallback>
-                        </Avatar>
-                        <div className="text-sm hidden md:block">
-                            <p className="font-medium text-slate-700">Hospital Tubarão</p>
-                            <p className="text-xs text-slate-400">Gerente Responsável</p>
-                        </div>
-                        <Button variant="ghost" size="icon" onClick={handleLogout} className="ml-2 text-slate-400 hover:text-red-500">
-                            <LogOut className="w-5 h-5" />
-                        </Button>
-                    </div>
-                </div>
-            </header>
-
+        <div className="min-h-screen bg-transparent">
             <div className="container mx-auto px-4 py-8 max-w-7xl">
                 {/* KPI Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">

@@ -88,28 +88,13 @@ export default function ChatPage() {
   )
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-blue-50">
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-emerald-100 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center">
-              <Heart className="w-5 h-5 text-white" />
-            </div>
-            <h1 className="text-xl font-bold text-emerald-800">VetCare</h1>
-          </div>
-          <Button className="bg-emerald-600 hover:bg-emerald-700" asChild>
-            <Link href="/dashboard">Dashboard</Link>
-          </Button>
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-transparent">
       <div className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
-            <h2 className="text-3xl font-bold text-emerald-800 mb-2">Chat Veterinário</h2>
-            <p className="text-emerald-700">Converse diretamente com veterinários qualificados</p>
+            <h2 className="text-3xl font-bold text-emerald-800 dark:text-emerald-400 mb-2">Chat Veterinário</h2>
+            <p className="text-emerald-700 dark:text-emerald-500/80">Converse diretamente com veterinários qualificados</p>
           </div>
           <Button className="bg-blue-600 hover:bg-blue-700" asChild>
             <Link href="/chat/new">
@@ -173,8 +158,8 @@ export default function ChatPage() {
         {/* Conversations List */}
         <div className="space-y-4">
           {filteredConversations.map((conversation) => (
-            <Card key={conversation.id} className="hover:shadow-lg transition-shadow cursor-pointer" asChild>
-              <Link href={`/chat/${conversation.id}`}>
+            <Link key={conversation.id} href={`/chat/${conversation.id}`}>
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4">
                     {/* Avatar with Online Status */}
@@ -224,8 +209,8 @@ export default function ChatPage() {
                     </div>
                   </div>
                 </CardContent>
-              </Link>
-            </Card>
+              </Card>
+            </Link>
           ))}
         </div>
 
@@ -281,6 +266,6 @@ export default function ChatPage() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </div >
   )
 }
