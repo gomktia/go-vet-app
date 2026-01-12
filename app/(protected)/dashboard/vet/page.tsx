@@ -115,9 +115,26 @@ export default function VetDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50 p-4">
-      <div className="max-w-7xl mx-auto space-y-6">
-        {/* Header */}
+    <div className="container mx-auto px-4 py-8 max-w-7xl">
+      <div className="space-y-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+          <div>
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-emerald-400">Painel Veterinário</h2>
+            <p className="text-slate-600 dark:text-slate-400">Acompanhe sua agenda e o cuidado com seus pacientes.</p>
+          </div>
+          <div className="flex gap-2">
+            <Link href="/dashboard/vet/settings">
+              <Button variant="outline" className="dark:border-slate-800 dark:hover:bg-slate-900">
+                <Settings className="w-4 h-4 mr-2" /> Configurações
+              </Button>
+            </Link>
+            <Link href="/dashboard/vet/reports">
+              <Button className="bg-emerald-600 hover:bg-emerald-700 text-white dark:bg-emerald-700 dark:hover:bg-emerald-600">
+                <BarChart3 className="w-4 h-4 mr-2" /> Relatórios
+              </Button>
+            </Link>
+          </div>
+        </div>
 
 
         {/* Stats Cards */}

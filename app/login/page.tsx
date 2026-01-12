@@ -20,30 +20,45 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
     setLoading(true)
 
-    const user = authenticateUser(email, password)
+    try {
+      const result = await authenticateUser(email, password)
 
-    if (user) {
-      loginUser(user)
-      router.push("/dashboard")
-    } else {
-      setError("Email ou senha incorretos")
+      if (result) {
+        loginUser(result.user, result.token)
+        router.push("/dashboard")
+      } else {
+        setError("Email ou senha incorretos")
+      }
+    } catch (err) {
+      setError("Ocorreu um erro ao tentar entrar. Tente novamente.")
     }
 
     setLoading(false)
   }
 
-  const fillTestUser = (userType: "tutor" | "vet") => {
-    if (userType === "tutor") {
-      setEmail("tutor@vetcare.com")
-      setPassword("123456")
-    } else {
-      setEmail("vet@vetcare.com")
-      setPassword("123456")
+  const fillTestUser = (userType: "tutor" | "vet" | "clinic" | "admin") => {
+    switch (userType) {
+      case "tutor":
+        setEmail("tutor@vetcare.com")
+        setPassword("123456")
+        break
+      case "vet":
+        setEmail("vet@vetcare.com")
+        setPassword("123456")
+        break
+      case "clinic":
+        setEmail("clinica@vetcare.com")
+        setPassword("123456")
+        break
+      case "admin":
+        setEmail("admin@vetcare.com")
+        setPassword("123456")
+        break
     }
   }
 
@@ -66,7 +81,7 @@ export default function LoginPage() {
               <Info className="w-4 h-4 text-blue-600" />
               <h3 className="font-medium text-blue-800">Usuários de Teste</h3>
             </div>
-            <div className="space-y-2">
+            <div className="grid grid-cols-2 gap-2">
               <Button
                 type="button"
                 variant="outline"
@@ -74,7 +89,7 @@ export default function LoginPage() {
                 className="w-full text-left justify-start border-blue-300 text-blue-700 hover:bg-blue-100 bg-transparent"
                 onClick={() => fillTestUser("tutor")}
               >
-                👤 Tutor: tutor@vetcare.com / 123456
+                👤 Tutor
               </Button>
               <Button
                 type="button"
@@ -83,7 +98,25 @@ export default function LoginPage() {
                 className="w-full text-left justify-start border-blue-300 text-blue-700 hover:bg-blue-100 bg-transparent"
                 onClick={() => fillTestUser("vet")}
               >
-                🩺 Veterinário: vet@vetcare.com / 123456
+                🩺 Veterinário
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="w-full text-left justify-start border-blue-300 text-blue-700 hover:bg-blue-100 bg-transparent"
+                onClick={() => fillTestUser("clinic")}
+              >
+                🏥 Clínica
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="w-full text-left justify-start border-blue-300 text-blue-700 hover:bg-blue-100 bg-transparent"
+                onClick={() => fillTestUser("admin")}
+              >
+                🔒 Admin
               </Button>
             </div>
           </div>

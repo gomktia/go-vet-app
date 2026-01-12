@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { MapPin, Search, Star, Stethoscope, AlertCircle, Building2, CalendarCheck, TrendingUp } from "lucide-react"
 import { clinics } from "@/lib/clinics"
 import Link from "next/link"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default function MarketplacePage() {
     return (
