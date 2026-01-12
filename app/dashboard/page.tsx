@@ -43,6 +43,10 @@ export default function DashboardPage() {
   useEffect(() => {
     if (user?.role === "veterinarian") {
       router.push("/dashboard/vet")
+    } else if (user?.role === "clinic") {
+      router.push("/dashboard/clinic")
+    } else if (user?.role === "admin") {
+      router.push("/dashboard/admin")
     }
   }, [user, router])
 
@@ -88,6 +92,14 @@ export default function DashboardPage() {
               </Link>
               <Link href="/payments" className="text-emerald-700 hover:text-emerald-900 text-sm font-medium">
                 Pagamentos
+              </Link>
+              <Link href="/dashboard/route-planner" className="flex items-center gap-1 text-blue-700 hover:text-blue-900 text-sm font-medium bg-blue-50 px-2 py-1 rounded-full border border-blue-100">
+                <Navigation className="w-3 h-3" />
+                Rotas
+              </Link>
+              <Link href="/dashboard/marketplace" className="text-emerald-700 hover:text-emerald-900 text-sm font-medium flex items-center gap-1">
+                <Building2 className="w-4 h-4" />
+                Rede de Clínicas
               </Link>
             </nav>
             <Button variant="ghost" size="sm" asChild>

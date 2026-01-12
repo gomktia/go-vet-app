@@ -134,11 +134,10 @@ export default function NewAppointmentPage() {
                   {pets.map((pet) => (
                     <div
                       key={pet.id}
-                      className={`p-4 border-2 rounded-lg cursor-pointer transition-colors ${
-                        appointmentData.petId === pet.id
+                      className={`p-4 border-2 rounded-lg cursor-pointer transition-colors ${appointmentData.petId === pet.id
                           ? "border-emerald-500 bg-emerald-50"
                           : "border-gray-200 hover:border-emerald-300"
-                      }`}
+                        }`}
                       onClick={() => setAppointmentData({ ...appointmentData, petId: pet.id })}
                     >
                       <div className="flex items-center gap-3">
@@ -161,12 +160,12 @@ export default function NewAppointmentPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Tipo de Atendimento</CardTitle>
-                <CardDescription>Selecione o tipo de serviço desejado</CardDescription>
+                <CardDescription>Selecione o tipo de serviço e onde será realizado</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="type">Tipo de Consulta *</Label>
+                    <Label htmlFor="type">Tipo de Procedimento *</Label>
                     <Select
                       value={appointmentData.type}
                       onValueChange={(value) => setAppointmentData({ ...appointmentData, type: value })}
@@ -175,56 +174,62 @@ export default function NewAppointmentPage() {
                         <SelectValue placeholder="Selecione o tipo" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="consulta">Consulta Geral</SelectItem>
-                        <SelectItem value="vacinacao">Vacinação</SelectItem>
-                        <SelectItem value="cirurgia">Cirurgia</SelectItem>
-                        <SelectItem value="exame">Exames</SelectItem>
-                        <SelectItem value="emergencia">Emergência</SelectItem>
-                        <SelectItem value="teleconsulta">Teleconsulta</SelectItem>
+                        <SelectItem value="cirurgia">Cirurgia (Requer Sala)</SelectItem>
+                        <SelectItem value="consulta">Consulta Especializada</SelectItem>
+                        <SelectItem value="exame">Exame de Imagem</SelectItem>
                         <SelectItem value="retorno">Retorno</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="priority">Prioridade</Label>
+                    <Label htmlFor="location">Local do Atendimento *</Label>
                     <Select
-                      value={appointmentData.priority}
-                      onValueChange={(value) => setAppointmentData({ ...appointmentData, priority: value })}
+                      value={appointmentData.location}
+                      onValueChange={(value) => setAppointmentData({ ...appointmentData, location: value })}
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder="Selecione a prioridade" />
+                        <SelectValue placeholder="Onde você vai atender?" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="baixa">Baixa</SelectItem>
-                        <SelectItem value="normal">Normal</SelectItem>
-                        <SelectItem value="alta">Alta</SelectItem>
-                        <SelectItem value="urgente">Urgente</SelectItem>
+                        <SelectItem value="clinic_partner">Clínica Parceira (Alugar Sala)</SelectItem>
+                        <SelectItem value="domicilio">Domicílio (Home Care)</SelectItem>
+                        <SelectItem value="own_clinic">Minha Clínica</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="location">Local do Atendimento *</Label>
-                  <Select
-                    value={appointmentData.location}
-                    onValueChange={(value) => setAppointmentData({ ...appointmentData, location: value })}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Selecione o local" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="presencial">Presencial - Clínica</SelectItem>
-                      <SelectItem value="domicilio">Domicílio - Visita em Casa</SelectItem>
-                      <SelectItem value="online">Online - Teleconsulta</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                {/* Workflow A: Vet Booking a Room */}
+                {appointmentData.location === "clinic_partner" && (
+                  <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 animate-in fade-in slide-in-from-top-2">
+                    <div className="flex items-center gap-2 mb-3">
+                      <MapPin className="text-blue-600 w-5 h-5" />
+                      <h4 className="font-semibold text-blue-900">Reservar Sala na Cidade do Cliente</h4>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="space-y-2">
+                        <Label className="text-blue-800">Selecione a Clínica Parceira</Label>
+                        <Select onValueChange={(v) => console.log(v)}>
+                          <SelectTrigger className="bg-white border-blue-300">
+                            <SelectValue placeholder="Buscar clínica por cidade..." />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="c1">Hospital Veterinário Tubarão (Sala Cirúrgica Disp.)</SelectItem>
+                            <SelectItem value="c2">Clínica Pet Torres (Sala Simples)</SelectItem>
+                            <SelectItem value="c4">Centro Vet Jaguaruna</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <p className="text-xs text-blue-600">O sistema enviará a solicitação de reserva da sala automaticamente para a clínica.</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {appointmentData.location === "domicilio" && (
                   <div className="space-y-2">
-                    <Label htmlFor="address">Endereço para Visita *</Label>
+                    <Label htmlFor="address">Endereço do Cliente *</Label>
                     <Input
                       id="address"
                       placeholder="Digite o endereço completo"
@@ -251,13 +256,12 @@ export default function NewAppointmentPage() {
                   {veterinarians.map((vet) => (
                     <div
                       key={vet.id}
-                      className={`p-4 border-2 rounded-lg cursor-pointer transition-colors ${
-                        appointmentData.vetId === vet.id
+                      className={`p-4 border-2 rounded-lg cursor-pointer transition-colors ${appointmentData.vetId === vet.id
                           ? "border-blue-500 bg-blue-50"
                           : vet.available
                             ? "border-gray-200 hover:border-blue-300"
                             : "border-gray-100 bg-gray-50 cursor-not-allowed"
-                      }`}
+                        }`}
                       onClick={() => vet.available && setAppointmentData({ ...appointmentData, vetId: vet.id })}
                     >
                       <div className="flex items-center justify-between">

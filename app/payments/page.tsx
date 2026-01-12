@@ -257,6 +257,56 @@ export default function PaymentsPage() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Financial Split Innovation */}
+        <Card className="border-blue-200 bg-blue-50/50">
+          <CardHeader>
+            <CardTitle className="text-blue-900 flex items-center gap-2">
+              <DollarSign className="w-5 h-5" />
+              SaaS Split Inteligente (Visão do Especialista)
+            </CardTitle>
+            <CardDescription>Visualização automática de repasse para clínicas parceiras</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-6">
+              <div className="flex justify-between items-center text-sm mb-4">
+                <span className="font-semibold text-gray-500">Última Cirurgia: Castração Luna (Clínica Pet Torres)</span>
+                <Badge variant="outline" className="text-blue-700 border-blue-200">Processado Automaticamente</Badge>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4 text-center">
+                <div className="p-4 bg-white rounded-lg border border-gray-100 shadow-sm">
+                  <p className="text-gray-500 text-xs uppercase font-bold tracking-wider">Valor Cobrado</p>
+                  <p className="text-2xl font-bold text-gray-900 mt-2">R$ 1.500,00</p>
+                  <p className="text-xs text-gray-400 mt-1">Pago pelo Cliente</p>
+                </div>
+
+                <div className="relative p-4 bg-green-50 rounded-lg border border-green-100 shadow-sm">
+                  <div className="absolute -left-3 top-1/2 -translate-y-1/2 bg-white rounded-full p-1 border border-gray-200 text-gray-400">
+                    <CheckCircle className="w-4 h-4" />
+                  </div>
+                  <p className="text-green-600 text-xs uppercase font-bold tracking-wider">Sua Parte (70%)</p>
+                  <p className="text-2xl font-bold text-green-700 mt-2">R$ 1.050,00</p>
+                  <p className="text-xs text-green-600 mt-1">Disponível em 2 dias</p>
+                </div>
+
+                <div className="relative p-4 bg-blue-50 rounded-lg border border-blue-100 shadow-sm">
+                  <div className="absolute -left-3 top-1/2 -translate-y-1/2 bg-white rounded-full p-1 border border-gray-200 text-gray-400">
+                    <CheckCircle className="w-4 h-4" />
+                  </div>
+                  <p className="text-blue-600 text-xs uppercase font-bold tracking-wider">Taxa Clínica (30%)</p>
+                  <p className="text-2xl font-bold text-blue-700 mt-2">R$ 450,00</p>
+                  <p className="text-xs text-blue-600 mt-1">Repasse Automático</p>
+                </div>
+              </div>
+
+              <div className="mt-4 p-3 bg-blue-100 text-blue-800 text-xs rounded flex items-center gap-2">
+                <AlertCircle className="w-4 h-4" />
+                O sistema já descontou a taxa de uso da sala e enviou o comprovante fiscal dividido para o Tutor.
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )
