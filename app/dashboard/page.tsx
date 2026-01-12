@@ -124,9 +124,11 @@ export default function DashboardPage() {
               <AvatarImage src={user.avatar || "/placeholder.svg"} />
               <AvatarFallback>
                 {user.name
-                  .split(" ")
-                  .map((n: string) => n[0])
-                  .join("")}
+                  ? user.name
+                    .split(" ")
+                    .map((n: string) => n[0])
+                    .join("")
+                  : "U"}
               </AvatarFallback>
             </Avatar>
           </div>
@@ -136,7 +138,7 @@ export default function DashboardPage() {
       <div className="container mx-auto px-4 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-emerald-800 mb-2">Olá, {user.name.split(" ")[0]}!</h2>
+          <h2 className="text-3xl font-bold text-emerald-800 mb-2">Olá, {user.name ? user.name.split(" ")[0] : "Usuário"}!</h2>
           <p className="text-emerald-700">Bem-vindo de volta ao VetCare. Vamos cuidar dos seus pets hoje?</p>
         </div>
 
