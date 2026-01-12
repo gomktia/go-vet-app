@@ -80,17 +80,21 @@ export default function DashboardPage() {
         {/* Welcome Section */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
           <div>
-            <h2 className="text-4xl font-black text-slate-900 dark:text-white mb-2 tracking-tight">
+            <h2 className="text-4xl font-black text-slate-900 dark:text-white mb-2 tracking-tight italic">
               Olá, <span className="text-emerald-600 dark:text-emerald-400">{user.name ? user.name.split(" ")[0] : "Usuário"}</span>!
             </h2>
-            <p className="text-slate-500 dark:text-slate-400">Aqui está um resumo da saúde dos seus pets.</p>
+            <p className="text-slate-500 dark:text-slate-400 font-medium">Aqui está um resumo da saúde dos seus pets.</p>
           </div>
-          <div className="flex gap-3">
-            <Button variant="outline" className="rounded-full dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
-              <Settings className="w-4 h-4 mr-2" /> Preferências
+          <div className="flex flex-wrap gap-3 w-full md:w-auto">
+            <Button variant="outline" className="flex-1 md:flex-none rounded-2xl dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm h-12 font-bold transition-all active:scale-95" asChild>
+              <Link href="/notifications">
+                <Settings className="w-4 h-4 mr-2" /> PREFERÊNCIAS
+              </Link>
             </Button>
-            <Button className="bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600 rounded-full shadow-lg shadow-emerald-600/20 px-6">
-              <Plus className="w-4 h-4 mr-2" /> Agendar Consulta
+            <Button className="flex-1 md:flex-none bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600 rounded-2xl shadow-lg shadow-emerald-600/20 h-12 px-8 font-black transition-all active:scale-95" asChild>
+              <Link href="/appointments">
+                <Plus className="w-5 h-5 mr-2" /> AGENDAR CONSULTA
+              </Link>
             </Button>
           </div>
         </div>
@@ -236,13 +240,13 @@ export default function DashboardPage() {
             </Card>
 
             {/* Lembretes / Financeiro Compact */}
-            <div className="bg-indigo-600 dark:bg-indigo-800 rounded-[2rem] p-8 text-white shadow-xl shadow-indigo-600/20 relative overflow-hidden">
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+            <div className="bg-indigo-600 dark:bg-indigo-800 rounded-[2rem] p-8 text-white shadow-xl shadow-indigo-600/20 relative overflow-hidden group">
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-1000"></div>
               <div className="relative z-10">
-                <h4 className="text-2xl font-black mb-1">VetCare+</h4>
-                <p className="text-indigo-100 text-sm mb-6 opacity-80">Cobertura total de saúde para seus pets em um único plano.</p>
-                <Button className="w-full bg-white text-indigo-600 hover:bg-indigo-50 font-bold rounded-2xl">
-                  VER BENEFÍCIOS
+                <h4 className="text-2xl font-black mb-1 italic tracking-tight">VetCare<span className="text-indigo-300">+</span></h4>
+                <p className="text-indigo-100 text-sm mb-6 opacity-80 font-medium">Cobertura total de saúde para seus pets em um único plano premium.</p>
+                <Button className="w-full bg-white text-indigo-600 hover:bg-indigo-50 font-black rounded-2xl h-12 shadow-inner" asChild>
+                  <Link href="/payments">VER BENEFÍCIOS</Link>
                 </Button>
               </div>
             </div>

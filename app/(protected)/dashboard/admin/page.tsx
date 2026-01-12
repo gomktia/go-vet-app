@@ -48,11 +48,13 @@ export default function AdminDashboardPage() {
                     <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Visão Geral da Plataforma</h2>
                     <p className="text-slate-600 dark:text-slate-400">Métricas em tempo real do ecossistema SaaS.</p>
                 </div>
-                <div className="flex gap-2">
-                    <Button variant="outline" className="dark:border-slate-800 dark:text-slate-300 dark:hover:bg-slate-800">
-                        <Settings className="w-4 h-4 mr-2" /> Configurações
+                <div className="flex flex-wrap gap-3 w-full md:w-auto">
+                    <Button variant="outline" className="flex-1 md:flex-none dark:border-slate-800 dark:text-slate-300 dark:hover:bg-slate-800 rounded-2xl h-11 transition-all active:scale-95" asChild>
+                        <Link href="/dashboard/admin/settings">
+                            <Settings className="w-4 h-4 mr-2" /> Configurações
+                        </Link>
                     </Button>
-                    <Button className="bg-purple-600 hover:bg-purple-700 text-white dark:bg-purple-700 dark:hover:bg-purple-600">
+                    <Button className="flex-1 md:flex-none bg-purple-600 hover:bg-purple-700 text-white dark:bg-purple-700 dark:hover:bg-purple-600 rounded-2xl h-11 transition-all active:scale-95">
                         <TrendingUp className="w-4 h-4 mr-2" /> Exportar Dados
                     </Button>
                 </div>

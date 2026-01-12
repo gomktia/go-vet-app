@@ -50,8 +50,8 @@ export default function MarketplacePage() {
 
                 <TabsContent value="available" className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {clinics.map((clinic) => (
-                        <Card key={clinic.id} className="overflow-hidden hover:shadow-lg transition-shadow border-emerald-100 dark:border-slate-800 dark:bg-slate-900/50">
-                            <div className="h-40 bg-gray-200 dark:bg-slate-800 relative">
+                        <Card key={clinic.id} className="overflow-hidden hover:shadow-lg transition-shadow border-emerald-100 dark:border-slate-800 dark:bg-slate-900/50 flex flex-col h-full">
+                            <div className="h-40 bg-gray-200 dark:bg-slate-800 relative flex-shrink-0">
                                 {clinic.imageUrl ? (
                                     <img
                                         src={clinic.imageUrl}
@@ -68,10 +68,10 @@ export default function MarketplacePage() {
                                 )}
                             </div>
 
-                            <CardHeader className="pb-3 px-4 pt-4">
+                            <CardHeader className="pb-3 px-4 pt-4 flex-shrink-0">
                                 <div className="flex justify-between items-start">
                                     <div>
-                                        <CardTitle className="text-lg text-emerald-900 dark:text-emerald-400">{clinic.name}</CardTitle>
+                                        <CardTitle className="text-lg text-emerald-900 dark:text-emerald-400 font-bold">{clinic.name}</CardTitle>
                                         <CardDescription className="flex items-center mt-1 dark:text-slate-500">
                                             <MapPin className="w-3 h-3 mr-1" /> {clinic.city}, {clinic.state}
                                         </CardDescription>
@@ -84,35 +84,37 @@ export default function MarketplacePage() {
                                 </div>
                             </CardHeader>
 
-                            <CardContent className="space-y-4 text-sm px-4">
-                                <p className="text-gray-600 dark:text-slate-400 line-clamp-2">{clinic.description || "Clínica parceira com estrutura completa para cirurgias e internação."}</p>
+                            <CardContent className="space-y-4 text-sm px-4 flex-1 flex flex-col justify-between">
+                                <div className="space-y-4">
+                                    <p className="text-gray-600 dark:text-slate-400 line-clamp-2">{clinic.description || "Clínica parceira com estrutura completa para cirurgias e internação."}</p>
 
-                                <div>
-                                    <p className="font-semibold text-gray-700 dark:text-slate-300 mb-2">Equipamentos Disponíveis:</p>
-                                    <div className="flex flex-wrap gap-1">
-                                        {clinic.equipment && clinic.equipment.length > 0 ? (
-                                            clinic.equipment.slice(0, 3).map((eq, i) => (
-                                                <Badge key={i} variant="secondary" className="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700">
-                                                    {eq}
-                                                </Badge>
-                                            ))
-                                        ) : (
-                                            <span className="text-gray-400 italic text-xs">Consulta básica apenas</span>
-                                        )}
-                                        {clinic.equipment && clinic.equipment.length > 3 && (
-                                            <Badge variant="secondary" className="text-xs bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-400">+{clinic.equipment.length - 3}</Badge>
-                                        )}
+                                    <div>
+                                        <p className="font-semibold text-gray-700 dark:text-slate-300 mb-2">Equipamentos Disponíveis:</p>
+                                        <div className="flex flex-wrap gap-1">
+                                            {clinic.equipment && clinic.equipment.length > 0 ? (
+                                                clinic.equipment.slice(0, 3).map((eq, i) => (
+                                                    <Badge key={i} variant="secondary" className="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700">
+                                                        {eq}
+                                                    </Badge>
+                                                ))
+                                            ) : (
+                                                <span className="text-gray-400 italic text-xs">Consulta básica apenas</span>
+                                            )}
+                                            {clinic.equipment && clinic.equipment.length > 3 && (
+                                                <Badge variant="secondary" className="text-xs bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-400">+{clinic.equipment.length - 3}</Badge>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div className="flex items-center justify-between pt-2 border-t border-gray-100 dark:border-slate-800">
-                                    <div className="text-xs text-gray-500 dark:text-slate-500">Valor Sala/Hora</div>
-                                    <div className="font-bold text-emerald-700 dark:text-emerald-400 text-lg">R$ {clinic.rentalPricePerHour || 0},00</div>
+                                <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-slate-800 mt-4">
+                                    <div className="text-xs text-gray-500 dark:text-slate-500 font-bold uppercase tracking-wider">Valor Sala/Hora</div>
+                                    <div className="font-black text-emerald-700 dark:text-emerald-400 text-xl">R$ {clinic.rentalPricePerHour || 0},00</div>
                                 </div>
                             </CardContent>
 
-                            <CardFooter className="px-4 pb-4">
-                                <Button className="w-full bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600">Ver Detalhes e Reservar</Button>
+                            <CardFooter className="px-4 pb-4 flex-shrink-0">
+                                <Button className="w-full bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600 h-12 rounded-xl font-bold shadow-lg shadow-emerald-500/10 active:scale-95 transition-all">Ver Detalhes e Reservar</Button>
                             </CardFooter>
                         </Card>
                     ))}

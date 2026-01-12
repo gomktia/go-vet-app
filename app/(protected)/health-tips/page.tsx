@@ -185,27 +185,30 @@ export default function HealthTipsPage() {
           <TabsContent value="nutrition" className="space-y-6">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {nutritionTips.map((tip) => (
-                <Card key={tip.id} className="hover:shadow-lg transition-shadow cursor-pointer" asChild>
-                  <Link href={`/health-tips/nutrition/${tip.id}`}>
-                    <div>
-                      <div className="aspect-video bg-gray-100 rounded-t-lg overflow-hidden">
+                <Link key={tip.id} href={`/health-tips/nutrition/${tip.id}`} className="group block h-full">
+                  <Card className="hover:shadow-xl transition-all border-none bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm overflow-hidden flex flex-col h-full pb-4">
+                    <div className="flex flex-col h-full">
+                      <div className="aspect-video bg-slate-200 dark:bg-slate-800 relative overflow-hidden flex-shrink-0">
                         <img
                           src={tip.image || "/placeholder.svg?height=200&width=300"}
                           alt={tip.title}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                       </div>
-                      <CardHeader>
-                        <div className="flex items-center justify-between mb-2">
-                          <Badge variant="outline">{tip.petType}</Badge>
-                          <span className="text-sm text-gray-500">{tip.readTime}</span>
+                      <CardHeader className="flex-1 space-y-3">
+                        <div className="flex items-center justify-between">
+                          <Badge className="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-400 border-none font-bold text-[10px] uppercase tracking-widest">{tip.petType}</Badge>
+                          <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{tip.readTime}</span>
                         </div>
-                        <CardTitle className="text-lg">{tip.title}</CardTitle>
-                        <CardDescription>{tip.description}</CardDescription>
+                        <div>
+                          <CardTitle className="text-xl font-black text-slate-800 dark:text-white leading-tight mb-2 group-hover:text-emerald-600 transition-colors">{tip.title}</CardTitle>
+                          <CardDescription className="text-sm font-medium text-slate-500 dark:text-slate-400 line-clamp-2 italic">{tip.description}</CardDescription>
+                        </div>
                       </CardHeader>
                     </div>
-                  </Link>
-                </Card>
+                  </Card>
+                </Link>
               ))}
             </div>
 

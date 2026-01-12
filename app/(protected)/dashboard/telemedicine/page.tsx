@@ -105,15 +105,18 @@ export default function TelemedicineRoom() {
                     {/* Tools & Files */}
                     <div className="flex-1 bg-white/5 backdrop-blur-xl rounded-[2rem] border border-white/10 p-6 space-y-4">
                         <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500">Prontuário Rápido</h3>
-                        <div className="space-y-2">
-                            <Button variant="ghost" className="w-full justify-start gap-3 bg-white/5 hover:bg-white/10 rounded-xl h-12 text-sm">
-                                <FileText className="w-4 h-4 text-emerald-400" /> Histórico Clínico
+                        <div className="space-y-3">
+                            <Button variant="ghost" className="w-full justify-start gap-3 bg-white/5 hover:bg-white/10 rounded-xl min-h-[3.5rem] h-auto py-3 px-4 text-sm whitespace-normal text-left transition-all hover:translate-x-1 border border-white/5">
+                                <FileText className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                                <span className="flex-1">Histórico Clínico</span>
                             </Button>
-                            <Button variant="ghost" className="w-full justify-start gap-3 bg-white/5 hover:bg-white/10 rounded-xl h-12 text-sm">
-                                <Pipette className="w-4 h-4 text-blue-400" /> Prescrever Medicamento
+                            <Button variant="ghost" className="w-full justify-start gap-3 bg-white/5 hover:bg-white/10 rounded-xl min-h-[3.5rem] h-auto py-3 px-4 text-sm whitespace-normal text-left transition-all hover:translate-x-1 border border-white/5">
+                                <Pipette className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                                <span className="flex-1">Prescrever Medicamento</span>
                             </Button>
-                            <Button variant="ghost" className="w-full justify-start gap-3 bg-white/10 text-white rounded-xl h-12 text-sm border border-white/10">
-                                <MessageSquare className="w-4 h-4 text-amber-400" /> Notas da Sessão
+                            <Button variant="ghost" className="w-full justify-start gap-3 bg-white/10 text-white rounded-xl min-h-[3.5rem] h-auto py-3 px-4 text-sm border border-white/20 whitespace-normal text-left transition-all hover:translate-x-1">
+                                <MessageSquare className="w-4 h-4 text-amber-400 flex-shrink-0" />
+                                <span className="flex-1">Notas da Sessão</span>
                             </Button>
                         </div>
                     </div>

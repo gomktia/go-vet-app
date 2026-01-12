@@ -68,9 +68,11 @@ export default function ClinicDashboardPage() {
                     <p className="text-slate-500 dark:text-slate-400 mt-1">Bem-vindo ao centro de operações do Hospital Veterinário Tubarão.</p>
                 </div>
                 <div className="flex gap-3">
-                    <Button variant="outline" className="rounded-full dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm px-6">
-                        <Settings className="w-4 h-4 mr-2" /> Unidade
-                    </Button>
+                    <Link href="/dashboard/clinic/settings">
+                        <Button variant="outline" className="rounded-full dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm px-6">
+                            <Settings className="w-4 h-4 mr-2" /> Unidade
+                        </Button>
+                    </Link>
                     <Link href="/dashboard/clinic/schedule">
                         <Button className="bg-indigo-600 hover:bg-indigo-700 text-white dark:bg-indigo-700 dark:hover:bg-indigo-600 rounded-full shadow-lg shadow-indigo-600/20 px-8">
                             Agenda Mestra
@@ -165,7 +167,9 @@ export default function ClinicDashboardPage() {
                                     </div>
                                 ))}
                             </div>
-                            <Button variant="ghost" className="w-full mt-6 text-indigo-600 text-xs font-bold hover:bg-indigo-50 dark:hover:bg-indigo-900/30">VER RELATÓRIO COMPLETO</Button>
+                            <Link href="/dashboard/clinic/finance" className="block w-full">
+                                <Button variant="ghost" className="w-full mt-6 text-indigo-600 text-xs font-bold hover:bg-indigo-50 dark:hover:bg-indigo-900/30">VER RELATÓRIO COMPLETO</Button>
+                            </Link>
                         </Card>
                     </div>
 

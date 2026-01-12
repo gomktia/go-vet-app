@@ -106,12 +106,16 @@ export default function VetDashboard() {
           <h2 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Consultório <span className="text-emerald-600 dark:text-emerald-400">Digital</span></h2>
           <p className="text-slate-500 dark:text-slate-400 mt-1">Sua central de pacientes, diagnósticos e produtividade.</p>
         </div>
-        <div className="flex gap-3">
-          <Button variant="outline" className="rounded-full shadow-sm dark:border-slate-800">
-            <Settings className="w-4 h-4 mr-2" /> Preferências
+        <div className="flex flex-wrap gap-3 w-full md:w-auto">
+          <Button variant="outline" className="flex-1 md:flex-none rounded-full shadow-sm dark:border-slate-800 h-10 font-bold transition-all active:scale-95" asChild>
+            <Link href="/dashboard/vet/settings">
+              <Settings className="w-4 h-4 mr-2" /> Preferências
+            </Link>
           </Button>
-          <Button className="bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600 rounded-full shadow-lg shadow-emerald-500/20 px-8">
-            <BarChart3 className="w-4 h-4 mr-2" /> Relatórios
+          <Button className="flex-1 md:flex-none bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600 rounded-full shadow-lg shadow-emerald-500/20 px-8 h-10 font-bold transition-all active:scale-95" asChild>
+            <Link href="/dashboard/vet/reports">
+              <BarChart3 className="w-4 h-4 mr-2" /> Relatórios
+            </Link>
           </Button>
         </div>
       </div>
@@ -235,8 +239,10 @@ export default function VetDashboard() {
             <div className="absolute -top-10 -right-10 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl"></div>
             <h3 className="text-2xl font-black mb-4">Sala de Espera</h3>
             <p className="text-slate-400 text-xs mb-6 leading-relaxed">3 pacientes aguardando agendamento por telemedicina.</p>
-            <Button className="w-full bg-emerald-600 hover:bg-emerald-700 font-black rounded-2xl h-12 shadow-lg shadow-emerald-500/20 group">
-              <Play className="w-4 h-4 mr-2 fill-current" /> INICIAR CHAMADA
+            <Button className="w-full bg-emerald-600 hover:bg-emerald-700 font-black rounded-2xl h-12 shadow-lg shadow-emerald-500/20 group transition-all active:scale-[0.98]" asChild>
+              <Link href="/dashboard/telemedicine">
+                <Play className="w-4 h-4 mr-2 fill-current" /> INICIAR CHAMADA
+              </Link>
             </Button>
           </div>
 

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { getCurrentUser, logoutUser, type User } from "@/lib/auth"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -34,6 +34,7 @@ import {
 
 export default function Sidebar() {
     const pathname = usePathname()
+    const router = useRouter()
     const [user, setUser] = useState<User | null>(null)
     const [isCollapsed, setIsCollapsed] = useState(false)
     const [isMobileOpen, setIsMobileOpen] = useState(false)
@@ -50,6 +51,11 @@ export default function Sidebar() {
     const toggleCollapse = () => setIsCollapsed(!isCollapsed)
     const toggleMobileMenu = () => setIsMobileOpen(!isMobileOpen)
 
+    const handleLogout = () => {
+        logoutUser()
+        router.push("/login")
+    }
+
     const getLinks = (role: string) => {
         switch (role) {
             case "admin":
@@ -58,6 +64,7 @@ export default function Sidebar() {
                     { href: "/dashboard/admin/users", label: "Usuários", icon: Users },
                     { href: "/dashboard/admin/finance", label: "Financeiro", icon: DollarSign },
                     { href: "/dashboard/admin/reports", label: "Relatórios", icon: FileText },
+                    { href: "/dashboard/admin/settings", label: "Configurações", icon: Settings },
                 ]
             case "clinic":
                 return [
@@ -65,6 +72,7 @@ export default function Sidebar() {
                     { href: "/dashboard/clinic/schedule", label: "Agenda de Salas", icon: Calendar },
                     { href: "/dashboard/telemedicine", label: "Salas de Vídeo", icon: Video },
                     { href: "/dashboard/clinic/finance", label: "Faturamento", icon: DollarSign },
+                    { href: "/dashboard/clinic/settings", label: "Configurações", icon: Settings },
                 ]
             case "veterinarian":
                 return [
@@ -185,7 +193,7 @@ export default function Sidebar() {
 
                     {/* Logout */}
                     <button
-                        onClick={() => logoutUser()}
+                        onClick={handleLogout}
                         className={`w-full flex items-center gap-3 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-lg transition-colors
                     ${isCollapsed ? "justify-center" : ""}
                   `}

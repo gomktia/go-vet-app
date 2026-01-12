@@ -25,117 +25,87 @@ export default function VetReports() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50 p-4">
-      <div className="max-w-7xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 p-4 md:p-8 pb-20 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto space-y-10">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="flex items-center gap-6">
             <Link href="/dashboard/vet">
-              <Button variant="outline" size="sm">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Voltar
+              <Button variant="ghost" size="icon" className="rounded-full bg-white dark:bg-slate-900 shadow-sm border dark:border-slate-800">
+                <ArrowLeft className="w-5 h-5 text-slate-600 dark:text-slate-400" />
               </Button>
             </Link>
             <div>
-              <h1 className="text-3xl font-bold text-emerald-900">Relatórios</h1>
-              <p className="text-emerald-700">Análise de desempenho e estatísticas</p>
+              <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Relatórios de <span className="text-emerald-600 dark:text-emerald-400">Desempenho</span></h1>
+              <p className="text-slate-500 dark:text-slate-400 mt-1 font-medium">Insights detalhados da sua prática veterinária.</p>
             </div>
           </div>
-          <Button className="bg-emerald-600 hover:bg-emerald-700">
-            <Download className="w-4 h-4 mr-2" />
-            Exportar PDF
-          </Button>
+          <div className="flex gap-3">
+            <Button variant="outline" className="rounded-full dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm px-6">
+              Filtros Avançados
+            </Button>
+            <Button className="bg-emerald-600 hover:bg-emerald-700 text-white dark:bg-emerald-700 dark:hover:bg-emerald-600 rounded-full shadow-lg shadow-emerald-500/20 px-8">
+              <Download className="w-4 h-4 mr-2" /> Exportar Dados
+            </Button>
+          </div>
         </div>
 
-        {/* Summary Cards */}
+        {/* High-Level KPIs */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <Card className="border-emerald-200">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-emerald-700">Total de Consultas</CardTitle>
-              <Calendar className="h-4 w-4 text-emerald-600" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-emerald-900">389</div>
-              <div className="flex items-center text-xs text-emerald-600">
-                <TrendingUp className="w-3 h-3 mr-1" />
-                +12% vs mês anterior
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-blue-200">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-blue-700">Receita Total</CardTitle>
-              <DollarSign className="h-4 w-4 text-blue-600" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-blue-900">R$ 60.5k</div>
-              <div className="flex items-center text-xs text-blue-600">
-                <TrendingUp className="w-3 h-3 mr-1" />
-                +18% vs mês anterior
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-purple-200">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-purple-700">Novos Pacientes</CardTitle>
-              <Users className="h-4 w-4 text-purple-600" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-purple-900">47</div>
-              <div className="flex items-center text-xs text-purple-600">
-                <TrendingUp className="w-3 h-3 mr-1" />
-                +8% vs mês anterior
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-yellow-200">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-yellow-700">Taxa de Satisfação</CardTitle>
-              <Activity className="h-4 w-4 text-yellow-600" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-yellow-900">96%</div>
-              <div className="flex items-center text-xs text-yellow-600">
-                <TrendingUp className="w-3 h-3 mr-1" />
-                +2% vs mês anterior
-              </div>
-            </CardContent>
-          </Card>
+          {[
+            { label: "Consultas", val: "389", trend: "+12%", color: "emerald", icon: Calendar },
+            { label: "Receita", val: "R$ 60.5k", trend: "+18%", color: "blue", icon: DollarSign },
+            { label: "Novos Tutores", val: "47", trend: "+8%", color: "purple", icon: Users },
+            { label: "Satisfação", val: "96%", trend: "+2%", color: "orange", icon: Activity }
+          ].map((kpi, i) => {
+            const Icon = kpi.icon
+            return (
+              <Card key={i} className="border-none shadow-lg shadow-slate-200/50 dark:shadow-none dark:bg-slate-900/50 overflow-hidden group">
+                <CardContent className="p-6 relative">
+                  <div className={`absolute -right-4 -bottom-4 opacity-[0.03] group-hover:scale-110 transition-transform duration-500 text-${kpi.color}-600`}>
+                    <Icon className="w-24 h-24" />
+                  </div>
+                  <div className="flex justify-between items-start mb-4">
+                    <div className={`p-2 rounded-xl bg-${kpi.color}-50 dark:bg-${kpi.color}-950/20`}>
+                      <Icon className={`w-5 h-5 text-${kpi.color}-600 dark:text-${kpi.color}-400`} />
+                    </div>
+                    <Badge className="bg-emerald-50 text-emerald-600 dark:bg-emerald-950/30 dark:text-emerald-400 border-none font-bold text-[10px]">{kpi.trend}</Badge>
+                  </div>
+                  <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">{kpi.label}</p>
+                  <h3 className="text-3xl font-black text-slate-800 dark:text-white leading-none">{kpi.val}</h3>
+                </CardContent>
+              </Card>
+            )
+          })}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Monthly Performance */}
-          <Card className="border-emerald-200">
-            <CardHeader>
-              <CardTitle className="text-emerald-900">Desempenho Mensal</CardTitle>
-              <CardDescription>Consultas e receita dos últimos 6 meses</CardDescription>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Performance Timeline */}
+          <Card className="border-none shadow-xl dark:bg-slate-900/50">
+            <CardHeader className="p-8">
+              <CardTitle className="text-xl font-bold text-slate-800 dark:text-white flex items-center gap-2">
+                <TrendingUp className="w-6 h-6 text-emerald-500" /> Histórico Semestral
+              </CardTitle>
+              <CardDescription className="dark:text-slate-400 font-medium">Evolução de atendimento e faturamento bruto</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="px-8 pb-8">
               <div className="space-y-4">
-                {monthlyStats.map((stat, index) => (
-                  <div
-                    key={stat.month}
-                    className="flex items-center justify-between p-3 border border-emerald-100 rounded-lg"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-700 font-medium text-sm">
+                {monthlyStats.map((stat) => (
+                  <div key={stat.month} className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl hover:bg-white dark:hover:bg-slate-800 transition-all border border-transparent hover:border-slate-100 dark:hover:border-slate-700 shadow-sm hover:shadow-md cursor-default group">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-white dark:bg-slate-900 rounded-xl flex items-center justify-center text-slate-900 dark:text-white font-black text-sm shadow-sm">
                         {stat.month}
                       </div>
                       <div>
-                        <p className="font-medium text-emerald-900">{stat.consultations} consultas</p>
-                        <p className="text-sm text-emerald-600">R$ {stat.revenue.toLocaleString()}</p>
+                        <p className="font-bold text-slate-800 dark:text-white">{stat.consultations} consultas</p>
+                        <p className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">R$ {stat.revenue.toLocaleString()}</p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="w-20 h-2 bg-emerald-100 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-emerald-500 rounded-full"
-                          style={{ width: `${(stat.consultations / 70) * 100}%` }}
-                        />
-                      </div>
+                    <div className="w-32 h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-emerald-500 rounded-full transition-all duration-1000 group-hover:bg-emerald-400"
+                        style={{ width: `${(stat.consultations / 70) * 100}%` }}
+                      />
                     </div>
                   </div>
                 ))}
@@ -143,83 +113,62 @@ export default function VetReports() {
             </CardContent>
           </Card>
 
-          {/* Top Treatments */}
-          <Card className="border-emerald-200">
-            <CardHeader>
-              <CardTitle className="text-emerald-900">Tratamentos Mais Realizados</CardTitle>
-              <CardDescription>Distribuição por tipo de atendimento</CardDescription>
+          {/* Treatment Distribution */}
+          <Card className="border-none shadow-xl dark:bg-slate-900/50">
+            <CardHeader className="p-8">
+              <CardTitle className="text-xl font-bold text-slate-800 dark:text-white flex items-center gap-2">
+                <Activity className="w-6 h-6 text-blue-500" /> Especialidades
+              </CardTitle>
+              <CardDescription className="dark:text-slate-400 font-medium">Principais motivos de atendimento na clínica</CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
+            <CardContent className="px-8 pb-8">
+              <div className="space-y-6">
                 {topTreatments.map((treatment, index) => (
-                  <div key={treatment.name} className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-700 font-medium text-sm">
-                        {index + 1}
-                      </div>
-                      <div>
-                        <p className="font-medium text-emerald-900">{treatment.name}</p>
-                        <p className="text-sm text-emerald-600">{treatment.count} procedimentos</p>
-                      </div>
+                  <div key={treatment.name} className="space-y-2">
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="font-bold text-slate-700 dark:text-slate-300">{treatment.name}</span>
+                      <span className="text-xs font-black text-slate-500">{treatment.count} atendimentos</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-16 h-2 bg-emerald-100 rounded-full overflow-hidden">
+                    <div className="flex items-center gap-4">
+                      <div className="flex-1 h-3 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-emerald-500 rounded-full"
+                          className={`h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-1000`}
                           style={{ width: `${treatment.percentage}%` }}
                         />
                       </div>
-                      <Badge variant="secondary" className="bg-emerald-100 text-emerald-800">
-                        {treatment.percentage}%
-                      </Badge>
+                      <span className="text-xs font-black text-emerald-600 dark:text-emerald-400 min-w-[3rem] text-right">{treatment.percentage}%</span>
                     </div>
                   </div>
                 ))}
+              </div>
+              <div className="mt-8 p-6 bg-blue-600 rounded-[2rem] text-white relative overflow-hidden group shadow-lg shadow-blue-600/20">
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-3xl group-hover:scale-110 transition-transform"></div>
+                <h4 className="text-lg font-black mb-1 leading-none relative z-10">Análise de IA VetCare</h4>
+                <p className="text-blue-50 text-xs font-medium relative z-10">Identificamos um aumento de 15% na demanda por Cirurgia Ortopédica nas quartas-feiras.</p>
               </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Additional Reports */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="border-emerald-200">
-            <CardHeader>
-              <CardTitle className="text-emerald-900">Relatório Financeiro</CardTitle>
-              <CardDescription>Análise detalhada de receitas e despesas</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
-                <Download className="w-4 h-4 mr-2" />
-                Gerar Relatório
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="border-emerald-200">
-            <CardHeader>
-              <CardTitle className="text-emerald-900">Relatório de Pacientes</CardTitle>
-              <CardDescription>Histórico e estatísticas dos pacientes</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
-                <Download className="w-4 h-4 mr-2" />
-                Gerar Relatório
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="border-emerald-200">
-            <CardHeader>
-              <CardTitle className="text-emerald-900">Relatório de Medicamentos</CardTitle>
-              <CardDescription>Prescrições e controle de estoque</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
-                <Download className="w-4 h-4 mr-2" />
-                Gerar Relatório
-              </Button>
-            </CardContent>
-          </Card>
+        {/* Detailed Generation Row */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            { t: "Relatório Financeiro", d: "DRE, Fluxo de Caixa e Repasses" },
+            { t: "Relatório de Pacientes", d: "Demografia e Frequência Clínica" },
+            { t: "Inventário Clínico", d: "Consumo de Médicamentos e Materiais" }
+          ].map((report, i) => (
+            <Card key={i} className="border-none shadow-md hover:shadow-xl transition-all dark:bg-slate-900/50 group cursor-default">
+              <CardHeader>
+                <CardTitle className="text-lg font-bold text-slate-800 dark:text-white">{report.t}</CardTitle>
+                <CardDescription className="dark:text-slate-400 font-medium">{report.d}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button className="w-full bg-slate-50 dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/20 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 font-bold rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-emerald-200 group-hover:scale-[1.02] transition-all">
+                  <Download className="w-4 h-4 mr-2" /> Gerar Relatório
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     </div>

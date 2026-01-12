@@ -92,57 +92,59 @@ export default function PetsPage() {
         {/* Pets Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredPets.map((pet) => (
-            <Card key={pet.id} className="hover:shadow-lg transition-shadow">
+            <Card key={pet.id} className="hover:shadow-lg transition-shadow flex flex-col h-full bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border-emerald-100 dark:border-slate-800">
               <CardHeader className="pb-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <Avatar className="w-16 h-16">
-                      <AvatarImage src={pet.avatar || "/placeholder.svg"} />
-                      <AvatarFallback>{pet.name[0]}</AvatarFallback>
+                    <Avatar className="w-16 h-16 border-2 border-emerald-100 dark:border-emerald-900/30">
+                      <AvatarImage src={pet.avatar || "/placeholder.svg"} className="object-cover" />
+                      <AvatarFallback className="bg-emerald-100 text-emerald-800 font-bold">{pet.name[0]}</AvatarFallback>
                     </Avatar>
                     <div>
-                      <CardTitle className="text-lg">{pet.name}</CardTitle>
-                      <p className="text-sm text-gray-600">
+                      <CardTitle className="text-lg text-emerald-900 dark:text-emerald-400 font-bold">{pet.name}</CardTitle>
+                      <p className="text-sm text-gray-600 dark:text-slate-400">
                         {pet.breed} • {pet.age}
                       </p>
                     </div>
                   </div>
-                  <Badge variant={pet.status === "Saudável" ? "default" : "secondary"}>{pet.status}</Badge>
+                  <Badge className={pet.status === "Saudável" ? "bg-emerald-100 text-emerald-800 hover:bg-emerald-200" : "bg-amber-100 text-amber-800 hover:bg-amber-200"}>
+                    {pet.status}
+                  </Badge>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4 flex-1 flex flex-col">
                 <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <p className="text-gray-600">Peso</p>
-                    <p className="font-medium">{pet.weight}</p>
+                  <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+                    <p className="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Peso</p>
+                    <p className="font-bold text-slate-700 dark:text-slate-200">{pet.weight}</p>
                   </div>
-                  <div>
-                    <p className="text-gray-600">Cor</p>
-                    <p className="font-medium">{pet.color}</p>
+                  <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+                    <p className="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Cor</p>
+                    <p className="font-bold text-slate-700 dark:text-slate-200">{pet.color}</p>
                   </div>
-                  <div>
-                    <p className="text-gray-600">Última consulta</p>
-                    <p className="font-medium">{pet.lastVisit}</p>
+                  <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+                    <p className="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Última consulta</p>
+                    <p className="font-bold text-slate-700 dark:text-slate-200">{pet.lastVisit}</p>
                   </div>
-                  <div>
-                    <p className="text-gray-600">Próxima vacina</p>
-                    <p className="font-medium">{pet.nextVaccine}</p>
+                  <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 shadow-inner">
+                    <p className="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Próxima vacina</p>
+                    <p className="font-bold text-emerald-600 dark:text-emerald-400">{pet.nextVaccine}</p>
                   </div>
                 </div>
 
-                <div className="flex gap-2 pt-2">
-                  <Button variant="outline" size="sm" className="flex-1 bg-transparent" asChild>
-                    <Link href={`/pets/${pet.id}`}>
-                      <FileText className="w-4 h-4 mr-1" />
+                <div className="flex gap-2 pt-4 mt-auto">
+                  <Button variant="outline" size="sm" className="flex-1 bg-white dark:bg-slate-800 dark:border-slate-700 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 border-emerald-100" asChild>
+                    <Link href={`/medical-records/${pet.id}`}>
+                      <FileText className="w-4 h-4 mr-2" />
                       Ver Perfil
                     </Link>
                   </Button>
-                  <Button variant="outline" size="sm" asChild>
+                  <Button variant="outline" size="sm" className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300" asChild>
                     <Link href={`/pets/${pet.id}/edit`}>
                       <Edit className="w-4 h-4" />
                     </Link>
                   </Button>
-                  <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700 bg-transparent">
+                  <Button variant="outline" size="sm" className="text-rose-600 hover:text-rose-700 hover:bg-rose-50 dark:hover:bg-rose-950/20 bg-white dark:bg-slate-800 border-rose-100 dark:border-rose-900/30">
                     <Trash2 className="w-4 h-4" />
                   </Button>
                 </div>
