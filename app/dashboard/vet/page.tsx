@@ -24,10 +24,7 @@ import { useRouter } from "next/navigation"
 export default function VetDashboard() {
   const router = useRouter()
 
-  const handleLogout = () => {
-    localStorage.removeItem("user")
-    router.push("/login")
-  }
+
 
   const todayAppointments = [
     {
@@ -121,48 +118,7 @@ export default function VetDashboard() {
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50 p-4">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold text-emerald-900">Dashboard Veterinário</h1>
-            <p className="text-emerald-700">Bem-vindo, Dr. João Santos</p>
-          </div>
-          <div className="flex gap-2">
-            <Button
-              variant="outline"
-              className="border-emerald-300 text-emerald-700 hover:bg-emerald-100 bg-transparent"
-              onClick={() => router.push("/dashboard/vet/settings")}
-            >
-              <Settings className="w-4 h-4 mr-2" />
-              Configurações
-            </Button>
-            <Button
-              variant="outline"
-              className="border-emerald-300 text-emerald-700 hover:bg-emerald-100 bg-transparent"
-              onClick={() => router.push("/dashboard/vet/reports")}
-            >
-              <BarChart3 className="w-4 h-4 mr-2" />
-              Relatórios
-            </Button>
-            <Button className="bg-red-600 hover:bg-red-700">
-              <AlertTriangle className="w-4 h-4 mr-2" />
-              Emergência
-            </Button>
-            <Link href="/appointments/new">
-              <Button className="bg-emerald-600 hover:bg-emerald-700">
-                <Calendar className="w-4 h-4 mr-2" />
-                Nova Consulta
-              </Button>
-            </Link>
-            <Button
-              variant="outline"
-              className="border-red-300 text-red-700 hover:bg-red-100 bg-transparent"
-              onClick={handleLogout}
-            >
-              <LogOut className="w-4 h-4 mr-2" />
-              Sair
-            </Button>
-          </div>
-        </div>
+
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">

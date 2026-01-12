@@ -37,10 +37,7 @@ export default function DashboardPage() {
     }
   }, [router])
 
-  const handleLogout = () => {
-    logoutUser()
-    router.push("/login")
-  }
+
 
   useEffect(() => {
     if (user?.role === "veterinarian") {
@@ -70,70 +67,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-blue-50">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-emerald-100 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center">
-              <Heart className="w-5 h-5 text-white" />
-            </div>
-            <h1 className="text-xl font-bold text-emerald-800">VetCare</h1>
-          </div>
-          <div className="flex items-center gap-4">
-            <nav className="hidden md:flex items-center gap-4">
-              <Link href="/pets" className="text-emerald-700 hover:text-emerald-900 text-sm font-medium">
-                Meus Pets
-              </Link>
-              <Link href="/appointments" className="text-emerald-700 hover:text-emerald-900 text-sm font-medium">
-                Agendamentos
-              </Link>
-              <Link href="/chat" className="text-emerald-700 hover:text-emerald-900 text-sm font-medium">
-                Chat
-              </Link>
-              <Link href="/health-tips" className="text-emerald-700 hover:text-emerald-900 text-sm font-medium">
-                Dicas de Saúde
-              </Link>
-              <Link href="/payments" className="text-emerald-700 hover:text-emerald-900 text-sm font-medium">
-                Pagamentos
-              </Link>
-              <Link href="/dashboard/route-planner" className="flex items-center gap-1 text-blue-700 hover:text-blue-900 text-sm font-medium bg-blue-50 px-2 py-1 rounded-full border border-blue-100">
-                <Navigation className="w-3 h-3" />
-                Rotas
-              </Link>
-              <Link href="/dashboard/marketplace" className="text-emerald-700 hover:text-emerald-900 text-sm font-medium flex items-center gap-1">
-                <Building2 className="w-4 h-4" />
-                Rede de Clínicas
-              </Link>
-            </nav>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/notifications">
-                <Bell className="w-4 h-4" />
-              </Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/payments">
-                <CreditCard className="w-4 h-4" />
-              </Link>
-            </Button>
-            <Button variant="ghost" size="sm">
-              <Settings className="w-4 h-4" />
-            </Button>
-            <Button variant="ghost" size="sm" onClick={handleLogout}>
-              <LogOut className="w-4 h-4" />
-            </Button>
-            <Avatar>
-              <AvatarImage src={user.avatar || "/placeholder.svg"} />
-              <AvatarFallback>
-                {user.name
-                  ? user.name
-                    .split(" ")
-                    .map((n: string) => n[0])
-                    .join("")
-                  : "U"}
-              </AvatarFallback>
-            </Avatar>
-          </div>
-        </div>
-      </header>
+
 
       <div className="container mx-auto px-4 py-8">
         {/* Welcome Section */}
