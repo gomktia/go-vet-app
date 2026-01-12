@@ -355,23 +355,26 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-full h-full bg-emerald-600 -z-10">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent"></div>
-        </div>
+      <section className="py-32 relative overflow-hidden bg-emerald-600 dark:bg-emerald-900">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.2),transparent)] opacity-40"></div>
 
-        <div className="container mx-auto px-6 text-center text-white space-y-10">
-          <h3 className="text-6xl md:text-8xl font-black italic tracking-tighter uppercase leading-none">Faça parte do <br />futuro <span className="text-emerald-300">VetCare.</span></h3>
-          <p className="text-xl md:text-2xl text-emerald-100 font-medium max-w-2xl mx-auto">Comece gratuitamente agora e descubra como a tecnologia pode elevar o padrão de cuidado do seu pet.</p>
+        <div className="container mx-auto px-6 text-center text-white relative z-10 space-y-10">
+          <h3 className="text-6xl md:text-8xl font-black italic tracking-tighter uppercase leading-[0.9]">
+            Faça parte do <br />
+            <span className="text-emerald-200">futuro VetCare.</span>
+          </h3>
+          <p className="text-xl md:text-2xl text-white font-semibold max-w-2xl mx-auto opacity-90">
+            Comece gratuitamente agora e descubra como a tecnologia pode elevar o padrão de cuidado do seu pet.
+          </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center pt-10">
-            <Button size="lg" variant="secondary" className="bg-white text-emerald-600 hover:bg-emerald-50 rounded-[2rem] h-20 px-12 font-black text-xl shadow-2xl active:scale-95 transition-all" asChild>
+            <Button size="lg" variant="secondary" className="bg-white text-emerald-700 hover:bg-emerald-50 rounded-[2rem] h-20 px-12 font-black text-xl shadow-2xl active:scale-95 transition-all outline-none border-none" asChild>
               <Link href="/register">CADASTRAR GRATUITAMENTE</Link>
             </Button>
-            <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-[2rem] h-20 px-12 font-black text-xl active:scale-95 transition-all bg-transparent" asChild>
+            <Button variant="outline" className="border-white/50 text-white hover:bg-white/10 rounded-[2rem] h-20 px-12 font-black text-xl active:scale-95 transition-all bg-transparent backdrop-blur-sm" asChild>
               <Link href="/about">FALAR COM ESPECIALISTA</Link>
             </Button>
           </div>
-          <p className="text-[10px] font-black text-emerald-300 uppercase tracking-[0.3em] pt-10">Sem cartão de crédito • Cancelamento a qualquer momento</p>
+          <p className="text-[10px] font-black text-white uppercase tracking-[0.3em] pt-10 opacity-70">Sem cartão de crédito • Cancelamento a qualquer momento</p>
         </div>
       </section>
 
